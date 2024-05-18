@@ -4,10 +4,18 @@
 
 class MyGame : public Toad::ToadApplication
 {
+	virtual void Initialize() override
+	{
+		
+	}
+
 	virtual void OnUpdate() override
 	{
-		std::cout << "engine is running" << std::endl;
+		std::cout << "window width " << Toad::ToadWindow::GetWindow()->GetWidth() << std::endl;
 	}
+
+private:
+
 
 };
 
