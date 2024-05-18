@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "S24_Uriel_Trejo", "S24_Uriel_Trejo\S24_Uriel_Trejo.vcxproj", "{EDD98FA4-2A70-44EF-ABF7-B6C68DCF2D76}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Toad", "Toad\Toad.vcxproj", "{6867AB80-A535-4AE3-8DAB-958C0040BE6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDD98FA4-2A70-44EF-ABF7-B6C68DCF2D76}.Debug|x64.ActiveCfg = Debug|x64
+		{EDD98FA4-2A70-44EF-ABF7-B6C68DCF2D76}.Debug|x64.Build.0 = Debug|x64
+		{EDD98FA4-2A70-44EF-ABF7-B6C68DCF2D76}.Release|x64.ActiveCfg = Release|x64
+		{EDD98FA4-2A70-44EF-ABF7-B6C68DCF2D76}.Release|x64.Build.0 = Release|x64
+		{6867AB80-A535-4AE3-8DAB-958C0040BE6A}.Debug|x64.ActiveCfg = Debug|x64
+		{6867AB80-A535-4AE3-8DAB-958C0040BE6A}.Debug|x64.Build.0 = Debug|x64
+		{6867AB80-A535-4AE3-8DAB-958C0040BE6A}.Release|x64.ActiveCfg = Release|x64
+		{6867AB80-A535-4AE3-8DAB-958C0040BE6A}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {86379B1F-18D8-4F73-9ED1-7E66D172E223}
+	EndGlobalSection
+EndGlobal
