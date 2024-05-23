@@ -1,4 +1,4 @@
-add_executable(Game Source.cpp)
+add_executable(Game game.cpp) 
 
 include_directories("../Toad/Include")
 

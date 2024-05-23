@@ -56,4 +56,19 @@ namespace Toad
 		return mWindow->GetHeight();
 	}
 
+	void ToadWindow::SetKeyPressedCallback(std::function<void(const KeyPressed&)>& callbackFunc)
+	{
+		mWindow->SetKeyPressedCallback(callbackFunc);
+	}
+
+	void ToadWindow::SetKeyReleasedCallback(std::function<void(const KeyReleased&)>& callbackFunc)
+	{
+		mWindow->SetKeyReleasedCallback(callbackFunc);
+	}
+
+	void ToadWindow::SetWindowCloseCallback(std::function<void()>& callbackFunc)
+	{
+		mWindow->SetWindowCloseCallback(callbackFunc);
+	}
+
 }
