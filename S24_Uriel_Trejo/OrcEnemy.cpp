@@ -2,8 +2,8 @@
 
 OrcEnemy::OrcEnemy(float x_pos, float y_pos) : x_pos(x_pos), y_pos(y_pos)
 {
-    x_offset = 50; // Assuming the orc is 128x128, half of the width
-    y_offset = 50; // Assuming the orc is 128x128, half of the height
+    x_offset = 30; // Offset to make the orc follow you better
+    y_offset = 30; // Offset to make the orc follow you better
 }
 
 void OrcEnemy::Update(float player_x_pos, float player_y_pos)

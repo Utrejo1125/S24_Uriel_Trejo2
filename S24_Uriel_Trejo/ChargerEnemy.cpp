@@ -8,114 +8,110 @@ void ChargerEnemy::Update(float player_x_pos, float player_y_pos)
 {
     const float alignmentRange = 10.0f;  // Define the range for alignment checking
 
-    if (vertical)   // Moves up and down
+    if (vertical)   // This enemy will patrol up and down
     {
-        // Check for alignment with the player on the y position within a range
-        if (!charging && std::abs(player_y_pos - y_pos) <= alignmentRange)  // Found a player!
+        // Check for alignment with the player on the y position within a range while patrolling
+        if (!charging && std::abs(player_y_pos - y_pos) <= alignmentRange)  // Found a player within range!
         {
-            charging = true;                                                
-            if (player_x_pos < x_pos) 
-                movingHorizontally = true;                                 
-            else                
-                movingVertically = false;                                   
+            charging = true;                                                // Begin charging!
+            if (player_x_pos < x_pos)
+                movingLeft = true;                                          // Move left
+
+            else
+                movingLeft = false;                                         // Move right
         }
 
+        // Enemy was spotted! time to charge
         if (charging)
         {
-            if (movingVertically)
+            if (movingLeft)                         // If charging left
             {
-                x_pos -= chargeSpeed;                                       
-                if (x_pos <= -15)
+                x_pos -= chargeSpeed;               // Move left based on charge speed                                   
+                if (x_pos <= -15)                   // If the enemy reaches the edge,
                 {
-                    x_pos = -15;                                            
-                    charging = false;                                       
+                    x_pos = -15;                    // Make sure the charger goes back to the right spot                     
+                    charging = false;               // Disable charging             
                 }
             }
-            else
+            else if (!movingLeft)                   // If charging right
             {
-                x_pos += chargeSpeed;                                       
-                if (x_pos >= 950)
+                x_pos += chargeSpeed;               // Move right based on charge speed
+                if (x_pos >= 950)                   // If the enemy reaches the edge,
                 {
-                    x_pos = 950;                                            
-                    charging = false;                                       
+                    x_pos = 950;                    // Make sure the charger goes back to the right spot
+                    charging = false;               // Disable charging
                 }
             }
         }
-        else
-        {
-            // Reverse direction at the edges
-            if (y_pos >= 775)
-            {
-                movingVertically = true;
-            }
-            else if (y_pos <= 0)
-            {
-                movingVertically = false;
-            }
 
-            if (movingVertically)
-            {
-                y_pos -= normalSpeed;                                       
-            }
-            else
-            {
-                y_pos += normalSpeed;                                       
-            }
+        // Enemy is just patrolling
+        else if (!charging)
+        {
+            if (y_pos >= 775)                       // Enemy has reached the top of the map
+                movingDown = true;                  // Start moving down
+
+            else if (y_pos <= 0)                    // Enemy has reached the bottom of the map  
+                movingDown = false;                 // Start moing up
+
+
+            if (movingDown)                         // Move down
+                y_pos -= normalSpeed;            
+
+            else if (!movingDown)                   // Move up
+                y_pos += normalSpeed;                           
         }
     }
-    else // Moves left and right
+    else if (!vertical)  // This enemy will patrol left and right
     {
-        // Check for alignment with the player on the x position within a range
+        // Check for alignment with the player on the y position within a range while patrolling
         if (!charging && std::abs(player_x_pos - x_pos) <= alignmentRange)
         {
             charging = true;
-            if (player_y_pos > y_pos) 
-                movingVertically = false; 
-            else 
-                movingHorizontally = true;
+            if (player_y_pos < y_pos)               // Begin Charging!
+                movingDown = true;                  // Move down
+            else
+                movingDown = false;                 // Move up
         }
 
+        // Enemy was spotted! time to charge
         if (charging)
         {
-            if (movingHorizontally)
+            if (movingDown)                         // If charging down
             {
-                y_pos -= chargeSpeed; 
-                if (y_pos <= -15)
+                y_pos -= chargeSpeed;               // Move down based on charge speed
+                if (y_pos <= -15)                   // If the enemy reaches the edge
                 {
-                    y_pos = -15; 
-                    charging = false; 
+                    y_pos = -15;                    // Make sure the charger goes back to the right spot
+                    charging = false;               // Disable charging
                 }
             }
-            else
+            else if (!movingDown)                   // If charging up
             {
-                y_pos += chargeSpeed; 
-                if (y_pos >= 750)
+                y_pos += chargeSpeed;               // Move up based on charge speed
+                if (y_pos >= 750)                   // If the enemy reaches the edge
                 {
-                    y_pos = 750; 
-                    charging = false; 
+                    y_pos = 750;                    // Make sure the charger goes back to the right spot
+                    charging = false;               // Disable charging
                 }
             }
         }
-        else
+
+        // Enemy is just patrolling
+        else if (!charging)
         {
             // Reverse direction at the edges
-            if (x_pos >= 975)
-            {
-                movingHorizontally = true;
-            }
-            else if (x_pos <= 0)
-            {
-                movingHorizontally = false;
-            }
+            if (x_pos >= 975)                       // Enemy has reached the right edge
+                movingLeft = true;                  // Start moving left
 
-            if (movingHorizontally)
-            {
+            else if (x_pos <= 0)                    // Enemy has reached the left edge
+                movingLeft = false;                 // Start moving right
+
+
+            if (movingLeft)                         // Move left
                 x_pos -= normalSpeed; 
-            }
-            else
-            {
+
+            else if (!movingLeft)                   // Move right
                 x_pos += normalSpeed; 
-            }
         }
     }
 }

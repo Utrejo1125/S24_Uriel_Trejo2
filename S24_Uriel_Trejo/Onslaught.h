@@ -172,7 +172,7 @@ private:
 	double exploder_spawn_rate = 2000;
 	double orc_spawn_rate = 5000;
 	double boss_spawn_rate = 5000;
-	double powerup_spawn_rate = 30000;	// 30 seconds
+	double powerup_spawn_rate = 0000;	// 30 seconds
 
 	// Timers
 	std::chrono::time_point<std::chrono::steady_clock> zombie_timer;
@@ -190,6 +190,7 @@ private:
 
 
 	std::chrono::time_point<std::chrono::steady_clock> explosive_ammo_limit;
+	std::chrono::time_point<std::chrono::steady_clock> immunity_limit;
 
 	//Powerup stuff
 	int player_health;
@@ -206,7 +207,9 @@ private:
 
 	void boomHandler();
 	const double explosive_ammo_duration = 15000;	// Lasts 15 seconds
+	const double immunity_duration = 18000;			// Lasts 3 seconds longer to account for any last bullets shot
 	bool boomy = false;
+	bool immune_to_explosions = false;
 
 	void shieldHandler();
 	bool shielded = false;

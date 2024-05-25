@@ -1,6 +1,6 @@
 #include "BossEnemy.h"
 
-BossEnemy::BossEnemy(float x_pos, float y_pos) : x_pos(x_pos), y_pos(y_pos)
+BossEnemy::BossEnemy(float x_pos, float y_pos) : x_pos(x_pos), y_pos(y_pos),health(49), prev_health_ticks(49)
 {
     // Define offsets based on boss size
     x_offset = 100; // Assuming the boss is 256x256, half of the width
@@ -45,7 +45,7 @@ void BossEnemy::Update(float player_x_pos, float player_y_pos)
 
     for (int i = 0; i < healthSpawner.size(); i++)
     {
-        if (i < health)  // Only update ticks up to the current health
+        if (i < static_cast<int>(health))  // Only update ticks up to the current health
         {
             healthSpawner[i].UpdatePosition(initial_x_pos + i * tick_spacing, initial_y_pos);
         }
@@ -57,7 +57,7 @@ void BossEnemy::Draw()
     Toad::Renderer::Draw(boss_sprite, x_pos, y_pos);
     Toad::Renderer::Draw(hp_bar, x_pos + 45, y_pos + 250);
 
-    for (int i = 0; i < health; i++)  // Only draw ticks up to the current health
+    for (int i = 0; i < healthSpawner.size(); i++)  // Only draw ticks up to the current health
     {
         healthSpawner[i].Draw();                                        //Display health
     }
@@ -70,5 +70,20 @@ double BossEnemy::GetHealth() const
 
 void BossEnemy::SetHealth(double new_health)
 {
+    int new_health_ticks = static_cast<int>(new_health);
+
+    if (new_health_ticks < prev_health_ticks)  // If integer health has decreased
+    {
+        // Remove health ticks
+        int ticks_to_remove = prev_health_ticks - new_health_ticks;
+        for (int i = 0; i < ticks_to_remove; i++)
+        {
+            if (!healthSpawner.empty())
+            {
+                healthSpawner.pop_back();  // Remove the last health tick
+            }
+        }
+    }
     health = new_health;
+    prev_health_ticks = new_health_ticks;  // Update previous health ticks
 }

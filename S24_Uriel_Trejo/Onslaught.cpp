@@ -23,6 +23,7 @@ void Onslaught::restartGame()
 	shooty = false;
 	shielded = false;
 	boomy = false;
+	immune_to_explosions = false;
 	startLevel();
 }
 
@@ -69,10 +70,16 @@ void Onslaught::LevelHandler(int level)
 		//TEST LEVEL, IS NOT A REAL LEVEL
 		kills = 0;
 		wonLevel = false;
-		exploder_spawns = 1;
-		exploder_spawn_rate = 1000;
-		orc_spawns = 2;
-		orc_spawn_rate = 2000;
+		//zombie_spawns = 1;
+		//zombie_spawn_rate = 1000;
+		//charger_spawns = 1;
+		//charger_spawn_rate = 5;
+		//exploder_spawns = 1;
+		//exploder_spawn_rate = 1000;
+		//orc_spawns = 1;
+		//orc_spawn_rate = 2000;
+		boss_spawns = 1;
+		boss_spawn_rate = 0;
 		kill_goal = 10000;
 	}
 	else if (level == 1)
@@ -701,7 +708,7 @@ void Onslaught::HandleExplosionCollision()
 			sprite_y_pos < currentExplosion.GetY() + 230 &&   // Assuming 230 is the height of the explosion
 			sprite_y_pos + 48 > currentExplosion.GetY())     // Assuming 48 is the height of the player
 		{
-			if(!boomy)
+			if(!immune_to_explosions)
 				player_health--;  // Player loses one HP
 		}
 
@@ -928,10 +935,10 @@ void Onslaught::HandlePlayerCollision()
 	for (auto zombieIterator = zombieSpawner.begin(); zombieIterator != zombieSpawner.end();)
 	{
 		// Check collision
-		if (sprite_x_pos < zombieIterator->GetX() + 64 &&	// assuming 64 is the width of the zombie
-			sprite_x_pos + 48 > zombieIterator->GetX() &&	// assuming 48 is the width of the player
-			sprite_y_pos < zombieIterator->GetY() + 64 &&	// assuming 64 is the height of the zombie
-			sprite_y_pos + 48 > zombieIterator->GetY())		// assuming 48 is the height of the player
+		if (sprite_x_pos < zombieIterator->GetX() + 46 &&	// assuming 46 is the true width of the zombie
+			sprite_x_pos + 46 > zombieIterator->GetX() &&	// assuming 46 is the true width of the player
+			sprite_y_pos < zombieIterator->GetY() + 46 &&	// assuming 46 is the true height of the zombie
+			sprite_y_pos + 46 > zombieIterator->GetY())		// assuming 46 is the true height of the player
 		{
 			zombieIterator = zombieSpawner.erase(zombieIterator);
 			kills++;
@@ -955,16 +962,16 @@ void Onslaught::HandlePlayerCollision()
 	for (auto chargerIterator = chargerSpawner.begin(); chargerIterator != chargerSpawner.end();)
 	{
 		// Check collision
-		if (sprite_x_pos < chargerIterator->GetX() + 48 &&	// assuming 48 is the width of the charger
-			sprite_x_pos + 48 > chargerIterator->GetX() &&	// assuming 48 is the width of the player
-			sprite_y_pos < chargerIterator->GetY() + 48 &&	// assuming 48 is the height of the charger
-			sprite_y_pos + 48 > chargerIterator->GetY())		// assuming 48 is the height of the player
+		if (sprite_x_pos < chargerIterator->GetX() + 46 &&		// assuming 46 is true the width of the charger
+			sprite_x_pos + 46 > chargerIterator->GetX() &&		// assuming 46 is true the width of the player
+			sprite_y_pos < chargerIterator->GetY() + 46 &&		// assuming 46 is true the height of the charger
+			sprite_y_pos + 46 > chargerIterator->GetY())		// assuming 46 is true the height of the player
 		{
 			chargerIterator = chargerSpawner.erase(chargerIterator);
 			kills++;
 			if (shielded)
 			{
-				shielded = false;							// Remove shield
+				shielded = false;								// Remove shield
 			}
 			else
 			{
@@ -982,16 +989,16 @@ void Onslaught::HandlePlayerCollision()
 	for (auto exploderIterator = exploderSpawner.begin(); exploderIterator != exploderSpawner.end();)
 	{
 		// Check collision
-		if (sprite_x_pos < exploderIterator->GetX() + 64 &&	// assuming 64 is the width of the exploder
-			sprite_x_pos + 48 > exploderIterator->GetX() &&	// assuming 48 is the width of the player
-			sprite_y_pos < exploderIterator->GetY() + 64 &&	// assuming 64 is the height of the exploder
-			sprite_y_pos + 48 > exploderIterator->GetY())		// assuming 48 is the height of the player
+		if (sprite_x_pos < exploderIterator->GetX() + 49 &&		// assuming 49 is the true width of the exploder
+			sprite_x_pos + 46 > exploderIterator->GetX() &&		// assuming 46 is the true width of the player
+			sprite_y_pos < exploderIterator->GetY() + 48 &&		// assuming 48 is the true height of the exploder
+			sprite_y_pos + 46 > exploderIterator->GetY())		// assuming 46 is the true height of the player
 		{
 			exploderIterator = exploderSpawner.erase(exploderIterator);
 			kills++;
 			if (shielded)
 			{
-				shielded = false;							// Remove shield
+				shielded = false;								// Remove shield
 			}
 			else
 			{
@@ -1009,14 +1016,22 @@ void Onslaught::HandlePlayerCollision()
 	for (auto orcIterator = orcSpawner.begin(); orcIterator != orcSpawner.end();)
 	{
 		// Check collision
-		if (sprite_x_pos < orcIterator->GetX() + 128 &&	// assuming 128 is the width of the orc
-			sprite_x_pos + 48 > orcIterator->GetX() &&	// assuming 48 is the width of the player
-			sprite_y_pos < orcIterator->GetY() + 128 &&	// assuming 128 is the height of the orc
-			sprite_y_pos + 48 > orcIterator->GetY())		// assuming 48 is the height of the player
+		if (sprite_x_pos < orcIterator->GetX() + 105 &&		// assuming 105 is the true width of the orc
+			sprite_x_pos + 46 > orcIterator->GetX() &&		// assuming 46 is the true width of the player
+			sprite_y_pos < orcIterator->GetY() + 105 &&		// assuming 105 is the true height of the orc
+			sprite_y_pos + 46 > orcIterator->GetY())		// assuming 46 is the true height of the player
 		{
 			if (shielded)
 			{
 				shielded = false;							// Remove shield
+				if (current_state == UP && !isMoving)
+					sprite_y_pos -= 50;						// Knockback
+				else if (current_state == LEFT && !isMoving)
+					sprite_x_pos += 50;						// Knockback
+				else if (current_state == RIGHT && !isMoving)
+					sprite_x_pos -= 50;						// Knockback
+				else if (current_state == DOWN && !isMoving)
+					sprite_x_pos += 50;						// Knockback
 			}
 			else
 			{
@@ -1034,14 +1049,22 @@ void Onslaught::HandlePlayerCollision()
 	for (auto bossIterator = bossSpawner.begin(); bossIterator != bossSpawner.end();)
 	{
 		// Check collision
-		if (sprite_x_pos < bossIterator->GetX() + 200 &&	// assuming 200 is the width of the boss
-			sprite_x_pos + 48 > bossIterator->GetX() &&	// assuming 48 is the width of the player
+		if (sprite_x_pos < bossIterator->GetX() + 200 &&	// assuming 180 is the width of the boss
+			sprite_x_pos + 46 > bossIterator->GetX() &&		// assuming 46 is the true width of the player
 			sprite_y_pos < bossIterator->GetY() + 200 &&	// assuming 200 is the height of the boss
-			sprite_y_pos + 48 > bossIterator->GetY())		// assuming 48 is the height of the player
+			sprite_y_pos + 46 > bossIterator->GetY())		// assuming 46 is the true height of the player
 		{
 			if (shielded)
 			{
 				shielded = false;							// Remove shield
+				if (current_state == UP && !isMoving)
+					sprite_y_pos -= 75;						// Knockback
+				else if (current_state == LEFT && !isMoving)
+					sprite_x_pos += 75;						// Knockback
+				else if (current_state == RIGHT && !isMoving)
+					sprite_x_pos -= 75;						// Knockback
+				else if (current_state == DOWN && !isMoving)
+					sprite_x_pos += 75;						// Knockback
 			}
 			else
 			{
@@ -1121,6 +1144,7 @@ void Onslaught::CheckIfLost()
 		shooty = false;
 		shielded = false;
 		boomy = false;
+		immune_to_explosions = false;
 		
 		
 		Toad::Renderer::Draw(loss_screen, 0, 0); // End the game
@@ -1535,7 +1559,9 @@ void Onslaught::GattlingGunPowerup()
 void Onslaught::ExplosiveAmmoPowerup()
 {
 	boomy = true;
+	immune_to_explosions = true;
 	explosive_ammo_limit = std::chrono::steady_clock::now();
+	immunity_limit = std::chrono::steady_clock::now();
 #if TOAD_DEBUG==2
 	std::cout << "Explosive Ammo Activated!" << std::endl;
 #endif
@@ -1586,6 +1612,7 @@ void Onslaught::boomHandler()
 {
 	auto current_time = std::chrono::steady_clock::now();
 	auto elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - explosive_ammo_limit);
+	auto elapsed_time_immune = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - immunity_limit);
 
 	if (elapsed_time.count() >= explosive_ammo_duration)
 	{
@@ -1593,6 +1620,13 @@ void Onslaught::boomHandler()
 		std::cout << "Explosive Ammo Ended!" << std::endl;
 #endif
 		boomy = false;
+	}
+	if (elapsed_time.count() >= immunity_duration)
+	{
+#if TOAD_DEBUG==2
+		std::cout << "Immunity to Explosions Ended!" << std::endl;
+#endif
+		immune_to_explosions = false;
 	}
 }
 
@@ -1616,6 +1650,8 @@ void Onslaught::PerformanceChecker()
 	std::cout << explosionSpawner.size() << " explosion currently on the map!\n";
 	std::cout << orcSpawner.size() << " orcs currently on the map!\n";
 	std::cout << bossSpawner.size() << " bosses currently on the map!\n";
+	if (bossSpawner.size() > 0)
+		std::cout << bossSpawner.at(0).healthSpawner.size() << "health ticks currently on the map!\n";
 #endif
 }
 

@@ -17,13 +17,15 @@ public:
 
 	double GetHealth() const;
 	void SetHealth(double new_health);
+	std::vector<Health> healthSpawner;
 
 private:
 	Toad::Image boss_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/king_ogre.png" };
 	Toad::Image hp_bar{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/king_ogre_hp_bar.png" };
 	float x_pos, y_pos;
 	double health = 49;
-	std::vector<Health> healthSpawner;
+	int prev_health_ticks;	// Will be used to track integer values of health
+
 
 	int x_offset, y_offset;
 };
