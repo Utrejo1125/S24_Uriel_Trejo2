@@ -74,13 +74,13 @@ void Onslaught::LevelHandler(int level)
 		//zombie_spawn_rate = 1000;
 		//charger_spawns = 1;
 		//charger_spawn_rate = 5;
-		//exploder_spawns = 1;
-		//exploder_spawn_rate = 1000;
+		/*exploder_spawns = 1;
+		exploder_spawn_rate = 1000;*/
 		//orc_spawns = 1;
 		//orc_spawn_rate = 2000;
-		boss_spawns = 1;
-		boss_spawn_rate = 0;
-		kill_goal = 10000;
+		//boss_spawns = 1;
+		//boss_spawn_rate = 0;
+		//kill_goal = 10000;
 	}
 	else if (level == 1)
 	{
@@ -252,6 +252,10 @@ void Onslaught::OnUpdate()
 		if (boomy)
 		{
 			boomHandler();
+		}
+		if (immune_to_explosions)
+		{
+			immuneHandler();
 		}
 
 		HandlePowerup();
@@ -1345,9 +1349,6 @@ void Onslaught::SpawnExplosion(float explosion_x_pos, float explosion_y_pos)
 {
 	std::chrono::time_point<std::chrono::steady_clock> current_time = std::chrono::steady_clock::now();
 	explosionSpawner.emplace_back(explosion_x_pos - 95, explosion_y_pos - 90, current_time);
-#if TOAD_DEBUG==2
-	std::cout << "Spawning explosion at (" << explosion_x_pos << ", " << explosion_y_pos << ")" << std::endl;
-#endif
 }
 
 
@@ -1563,6 +1564,7 @@ void Onslaught::ExplosiveAmmoPowerup()
 	explosive_ammo_limit = std::chrono::steady_clock::now();
 	immunity_limit = std::chrono::steady_clock::now();
 #if TOAD_DEBUG==2
+	std::cout << "Immunity Activated!" << std::endl;
 	std::cout << "Explosive Ammo Activated!" << std::endl;
 #endif
 }
@@ -1611,23 +1613,30 @@ void Onslaught::shootyHandler()
 void Onslaught::boomHandler()
 {
 	auto current_time = std::chrono::steady_clock::now();
-	auto elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - explosive_ammo_limit);
-	auto elapsed_time_immune = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - immunity_limit);
+	auto elapsed_time_explosive = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - explosive_ammo_limit);
 
-	if (elapsed_time.count() >= explosive_ammo_duration)
+	if (elapsed_time_explosive.count() >= explosive_ammo_duration)
 	{
 #if TOAD_DEBUG==2
 		std::cout << "Explosive Ammo Ended!" << std::endl;
 #endif
 		boomy = false;
 	}
-	if (elapsed_time.count() >= immunity_duration)
+}
+
+void Onslaught::immuneHandler()
+{
+	auto current_time = std::chrono::steady_clock::now();
+	auto elapsed_time_immune = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - immunity_limit);
+
+	if (elapsed_time_immune.count() >= immunity_duration)
 	{
 #if TOAD_DEBUG==2
 		std::cout << "Immunity to Explosions Ended!" << std::endl;
 #endif
 		immune_to_explosions = false;
 	}
+
 }
 
 
