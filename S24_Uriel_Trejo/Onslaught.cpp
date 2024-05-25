@@ -20,6 +20,7 @@ void Onslaught::restartGame()
 
 	//reset powerups
 	speedy = false;
+	speed = 5; // Reset to default speed
 	shooty = false;
 	shielded = false;
 	boomy = false;
@@ -87,7 +88,7 @@ void Onslaught::LevelHandler(int level)
 		kills = 0;
 		wonLevel = false;
 		zombie_spawns = 20;
-		zombie_spawn_rate = 1200;
+		zombie_spawn_rate = 1500;
 		kill_goal = 20;
 	}
 	else if (level == 2)
@@ -95,18 +96,18 @@ void Onslaught::LevelHandler(int level)
 		kills = 0;
 		wonLevel = false;
 		zombie_spawns = 50;
-		zombie_spawn_rate = 800;
+		zombie_spawn_rate = 1200;
 		kill_goal = 50;
 	}
 	else if (level == 3)
 	{
 		kills = 0;
 		wonLevel = false;
-		zombie_spawns = 40;
-		zombie_spawn_rate = 800;
+		zombie_spawns = 30;
+		zombie_spawn_rate = 1000;
 		charger_spawns = 10;
-		charger_spawn_rate = 1500;
-		kill_goal = 50;
+		charger_spawn_rate = 3000;
+		kill_goal = 30;
 	}
 	else if (level == 4)
 	{
@@ -144,7 +145,7 @@ void Onslaught::LevelHandler(int level)
 	{
 		kills = 0;
 		wonLevel = false;
-		//zombie_spawns = -1;
+		zombie_spawns = -1;
 		zombie_spawn_rate = 1000;
 		boss_spawns = 1;
 		boss_spawn_rate = 100;
@@ -307,12 +308,12 @@ void Onslaught::OnKeyPress(const Toad::KeyPressed& e)
 			num_keys_pressed++;
 			current_state = UP;
 		}
-		else if (e.GetKeyCode() == TOAD_KEY_A || e.GetKeyCode() == TOAD_KEY_UP)
+		else if (e.GetKeyCode() == TOAD_KEY_A || e.GetKeyCode() == TOAD_KEY_LEFT)
 		{
 			num_keys_pressed++;
 			current_state = LEFT;
 		}
-		else if (e.GetKeyCode() == TOAD_KEY_D || e.GetKeyCode() == TOAD_KEY_UP)
+		else if (e.GetKeyCode() == TOAD_KEY_D || e.GetKeyCode() == TOAD_KEY_RIGHT)
 		{
 			num_keys_pressed++;
 			current_state = RIGHT;
@@ -1145,6 +1146,7 @@ void Onslaught::CheckIfLost()
 
 		//reset powerups
 		speedy = false;
+		speed = 5; // Reset to default speed
 		shooty = false;
 		shielded = false;
 		boomy = false;

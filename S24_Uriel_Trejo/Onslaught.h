@@ -172,7 +172,7 @@ private:
 	double exploder_spawn_rate = 2000;
 	double orc_spawn_rate = 5000;
 	double boss_spawn_rate = 5000;
-	double powerup_spawn_rate = 30000;	// 30 seconds
+	double powerup_spawn_rate = 0000;	// 30 seconds
 
 	// Timers
 	std::chrono::time_point<std::chrono::steady_clock> zombie_timer;
