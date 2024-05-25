@@ -16,10 +16,10 @@ public:
 
 	int GetSelection() const;
 private:
-	Toad::Image speed_powerup{ "../Assets/Textures/Onslaught/powerup_speed.png" };
-	Toad::Image gun_powerup{ "../Assets/Textures/Onslaught/powerup_gattling.png" };
-	Toad::Image explosive_powerup{ "../Assets/Textures/Onslaught/powerup_explosive.png" };
-	Toad::Image shield_powerup{ "../Assets/Textures/Onslaught/powerup_shield.png" };
+	Toad::Image speed_powerup{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/powerup_speed.png" };
+	Toad::Image gun_powerup{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/powerup_gattling.png" };
+	Toad::Image explosive_powerup{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/powerup_explosive.png" };
+	Toad::Image shield_powerup{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/powerup_shield.png" };
 	float x_pos, y_pos;
 
 	int selector;

@@ -18,7 +18,7 @@ public:
 	void SetHealth(double new_health);
 
 private:
-	Toad::Image orc_sprite{ "../Assets/Textures/Onslaught/orc.png" };
+	Toad::Image orc_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/orc.png" };
 	float x_pos, y_pos;
 	float x_offset, y_offset;
 	double health = 10.0;

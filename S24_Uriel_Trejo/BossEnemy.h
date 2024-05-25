@@ -18,7 +18,7 @@ public:
 	void SetHealth(double new_health);
 
 private:
-	Toad::Image boss_sprite{ "../Assets/Textures/Onslaught/king_ogre.png" };
+	Toad::Image boss_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/king_ogre.png" };
 	float x_pos, y_pos;
 	int health = 250;
 

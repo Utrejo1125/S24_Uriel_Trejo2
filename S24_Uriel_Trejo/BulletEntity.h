@@ -17,7 +17,7 @@ public:
 	float GetY() const { return y_pos; }
 
 private:
-	Toad::Image bullet_sprite{ "../Assets/Textures/Onslaught/bullet.png" };
+	Toad::Image bullet_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/bullet.png" };
 	float x_pos, y_pos;
 	float speed = 10.0f;	//speed of bullet
 	int direction;

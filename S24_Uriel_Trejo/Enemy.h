@@ -4,7 +4,7 @@
 class Enemy
 {
 public:
-	Enemy(float x_pos = 0, float y_pos = 0, double health = 1.0, const std::string& spritePath = "../Assets/Textures/Onslaught/default.png"); // Default constructor with default parameters
+	Enemy(float x_pos = 0, float y_pos = 0, double health = 1.0, const std::string& spritePath = "../&{PROJECT_BINARY_DIR}/Assets/Textures/default.png"); // Default constructor with default parameters
 
 	virtual void Update(float player_x_pos, float player_y_pos) = 0;
 	virtual void Draw();

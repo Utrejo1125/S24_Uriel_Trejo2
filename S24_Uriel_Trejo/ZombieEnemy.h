@@ -15,6 +15,6 @@ public:
 	float GetY() const { return y_pos; }
 
 private:
-	Toad::Image zombie_sprite{ "../Assets/Textures/Onslaught/zombie.png" };
+	Toad::Image zombie_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/zombie.png" };
 	float x_pos, y_pos;
 };

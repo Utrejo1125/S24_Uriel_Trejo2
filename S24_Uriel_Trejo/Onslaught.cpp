@@ -1079,6 +1079,12 @@ void Onslaught::CheckIfLost()
 			bossSpawner.pop_back();
 			boss_spawns = bossSpawner.size();
 		}
+
+		//reset powerups
+		speedy = false;
+		shooty = false;
+		shielded = false;
+		boomy = false;
 		
 		
 		Toad::Renderer::Draw(loss_screen, 0, 0); // End the game

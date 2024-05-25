@@ -15,6 +15,6 @@ public:
 	float GetY() const { return y_pos; }
 
 private:
-	Toad::Image exploder_sprite{ "../Assets/Textures/Onslaught/exploder.png" };
+	Toad::Image exploder_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/exploder.png" };
 	float x_pos, y_pos;
 };

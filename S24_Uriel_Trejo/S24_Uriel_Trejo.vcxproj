@@ -142,7 +142,6 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ExploderEnemy.cpp" />
     <ClCompile Include="Explosion.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Onslaught.cpp" />
     <ClCompile Include="OrcEnemy.cpp" />
@@ -156,7 +155,6 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExploderEnemy.h" />
     <ClInclude Include="Explosion.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Onslaught.h" />
     <ClInclude Include="OrcEnemy.h" />

@@ -90,32 +90,34 @@ public:
 
 private:
 	// Assets:
-	Toad::Image background{ "../Assets/Textures/Onslaught/background.png" };
-	Toad::Image loss_screen{ "../Assets/Textures/Onslaught/lose.png" };
-	Toad::Image win_screen{ "../Assets/Textures/Onslaught/win.png" };
-	Toad::Image bullet{ "../Assets/Textures/Onslaught/sprite_down.png" };
+	//	Toad::Image day{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/backdrop.png" };
 
-	Toad::Image shield{ "../Assets/Textures/Onslaught/shield.png" };
+	Toad::Image background{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/background.png" };
+	Toad::Image loss_screen{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/lose.png" };
+	Toad::Image win_screen{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/win.png" };
+	Toad::Image bullet{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_down.png" };
 
-	Toad::Image sprite_up{ "../Assets/Textures/Onslaught/sprite_up.png" };
-	Toad::Image sprite_left{ "../Assets/Textures/Onslaught/sprite_left.png" };
-	Toad::Image sprite_right{ "../Assets/Textures/Onslaught/sprite_right.png" };
-	Toad::Image sprite_down{ "../Assets/Textures/Onslaught/sprite_down.png" };
+	Toad::Image shield{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/shield.png" };
 
-	Toad::Image sprite_up_speed{ "../Assets/Textures/Onslaught/sprite_up_speed.png" };
-	Toad::Image sprite_left_speed{ "../Assets/Textures/Onslaught/sprite_left_speed.png" };
-	Toad::Image sprite_right_speed{ "../Assets/Textures/Onslaught/sprite_right_speed.png" };
-	Toad::Image sprite_down_speed{ "../Assets/Textures/Onslaught/sprite_down_speed.png" };
+	Toad::Image sprite_up{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_up.png" };
+	Toad::Image sprite_left{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_left.png" };
+	Toad::Image sprite_right{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_right.png" };
+	Toad::Image sprite_down{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_down.png" };
 
-	Toad::Image sprite_up_gattling{ "../Assets/Textures/Onslaught/sprite_up_gattling.png" };
-	Toad::Image sprite_left_gattling{ "../Assets/Textures/Onslaught/sprite_left_gattling.png" };
-	Toad::Image sprite_right_gattling{ "../Assets/Textures/Onslaught/sprite_right_gattling.png" };
-	Toad::Image sprite_down_gattling{ "../Assets/Textures/Onslaught/sprite_down_gattling.png" };
+	Toad::Image sprite_up_speed{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_up_speed.png" };
+	Toad::Image sprite_left_speed{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_left_speed.png" };
+	Toad::Image sprite_right_speed{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_right_speed.png" };
+	Toad::Image sprite_down_speed{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_down_speed.png" };
 
-	Toad::Image sprite_up_boom{ "../Assets/Textures/Onslaught/sprite_up_boom.png" };
-	Toad::Image sprite_left_boom{ "../Assets/Textures/Onslaught/sprite_left_boom.png" };
-	Toad::Image sprite_right_boom{ "../Assets/Textures/Onslaught/sprite_right_boom.png" };
-	Toad::Image sprite_down_boom{ "../Assets/Textures/Onslaught/sprite_down_boom.png" };
+	Toad::Image sprite_up_gattling{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_up_gattling.png" };
+	Toad::Image sprite_left_gattling{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_left_gattling.png" };
+	Toad::Image sprite_right_gattling{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_right_gattling.png" };
+	Toad::Image sprite_down_gattling{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_down_gattling.png" };
+
+	Toad::Image sprite_up_boom{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_up_boom.png" };
+	Toad::Image sprite_left_boom{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_left_boom.png" };
+	Toad::Image sprite_right_boom{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_right_boom.png" };
+	Toad::Image sprite_down_boom{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_down_boom.png" };
 
 	// Asset positions
 	float sprite_x_pos = 450;

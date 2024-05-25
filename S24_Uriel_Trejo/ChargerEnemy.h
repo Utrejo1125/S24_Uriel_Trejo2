@@ -15,7 +15,7 @@ public:
 	float GetY() const { return y_pos; }
 
 private:
-	Toad::Image charger_sprite{ "../Assets/Textures/Onslaught/charger.png" };
+	Toad::Image charger_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/charger.png" };
 	float x_pos, y_pos;
 	bool vertical;
 	bool movingVertically = true;		// For vertical movement
