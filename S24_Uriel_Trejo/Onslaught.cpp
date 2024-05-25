@@ -156,7 +156,9 @@ void Onslaught::TrackKills()
 	{
 		wonLevel = true;
 		level++;
+#if TOAD_DEBUG==2
 		std::cout << "Going to next level: level " << level << std::endl;
+#endif
 		LevelHandler(level);
 	}
 }
@@ -181,7 +183,6 @@ void Onslaught::OnUpdate()
 
 		if(!wonLevel)
 			TrackKills();
-		//std::cout << "Player Health: " << player_health << std::endl;
 		Toad::Renderer::Draw(background, 0, 0);
 		hud.DrawLevel(level);
 
@@ -657,7 +658,9 @@ void Onslaught::HandleExploderCollision()
 			{
 				// Delete exploder
 				SpawnExplosion(exploderIterator->GetX(), exploderIterator->GetY());	//Spawns explosion where exploder died
+#if TOAD_DEBUG==2
 				std::cout << "killed exploder!" << std::endl;
+#endif
 				exploderIterator = exploderSpawner.erase(exploderIterator);
 				kills++;
 				bulletDestroyed = true;
@@ -1183,7 +1186,9 @@ void Onslaught::SpawnPowerup(float powerup_x_pos, float powerup_y_pos, int selec
 	if (powerupSpawner.size() < 1)	// Only spawn if there is no powerup on ground
 	{
 		powerupSpawner.emplace_back(powerup_x_pos, powerup_y_pos, selector);
+#if TOAD_DEBUG==2
 		std::cout << "spawning powerup! " << std::endl;
+#endif
 	}
 }
 
@@ -1235,7 +1240,9 @@ void Onslaught::SpawnCharger(float charger_x_pos, float charger_y_pos, bool char
 	{
 		chargerSpawner.emplace_back(charger_x_pos, charger_y_pos, chargerIsVertical);
 		charger_spawns--;
+#if TOAD_DEBUG==2
 		std::cout << "spawning charger! " << charger_spawns << " spawns left!" << std::endl;
+#endif
 	}
 }
 
@@ -1288,7 +1295,9 @@ void Onslaught::SpawnExploder(float exploder_x_pos, float exploder_y_pos)
 	{
 		exploderSpawner.emplace_back(exploder_x_pos, exploder_y_pos);
 		exploder_spawns--;
+#if TOAD_DEBUG==2
 		std::cout << "spawning exploder! " << exploder_spawns << " spawns left!" << std::endl;
+#endif
 	}
 }
 
@@ -1312,7 +1321,9 @@ void Onslaught::SpawnExplosion(float explosion_x_pos, float explosion_y_pos)
 {
 	std::chrono::time_point<std::chrono::steady_clock> current_time = std::chrono::steady_clock::now();
 	explosionSpawner.emplace_back(explosion_x_pos - 95, explosion_y_pos - 90, current_time);
+#if TOAD_DEBUG==2
 	std::cout << "Spawning explosion at (" << explosion_x_pos << ", " << explosion_y_pos << ")" << std::endl;
+#endif
 }
 
 
@@ -1363,7 +1374,9 @@ void Onslaught::SpawnZombie(float zombie_x_pos, float zombie_y_pos)
 	{
 		zombieSpawner.emplace_back(zombie_x_pos, zombie_y_pos);
 		zombie_spawns--;
+#if TOAD_DEBUG==2
 		std::cout << "spawning zombie! " << zombie_spawns << " spawns left!" << std::endl;
+#endif
 	}
 }
 
@@ -1416,7 +1429,9 @@ void Onslaught::SpawnOrc(float orc_x_pos, float orc_y_pos)
 	{
 		orcSpawner.emplace_back(orc_x_pos, orc_y_pos);
 		orc_spawns--;
+#if TOAD_DEBUG==2
 		std::cout << "spawning orc! " << orc_spawns << " spawns left!" << std::endl;
+#endif
 	}
 }
 
@@ -1468,7 +1483,9 @@ void Onslaught::SpawnBoss(float boss_x_pos, float boss_y_pos)
 	{
 		bossSpawner.emplace_back(boss_x_pos, boss_y_pos);
 		boss_spawns--;
+#if TOAD_DEBUG==2
 		std::cout << "spawning boss! " << boss_spawns << " spawns left!" << std::endl;
+#endif
 	}
 }
 
@@ -1500,7 +1517,9 @@ void Onslaught::SpeedPowerup()
 	speed = 10; // Boosted speed
 	speed_limit = std::chrono::steady_clock::now();
 	speedy = true;
+#if TOAD_DEBUG==2
 	std::cout << "Speed Boost Activated!" << std::endl;
+#endif
 }
 
 
@@ -1508,21 +1527,27 @@ void Onslaught::GattlingGunPowerup()
 {
 	shooty = true;
 	shoot_limit = std::chrono::steady_clock::now();
+#if TOAD_DEBUG==2
 	std::cout << "Gattling Gun Activated!" << std::endl;
+#endif
 }
 
 void Onslaught::ExplosiveAmmoPowerup()
 {
 	boomy = true;
 	explosive_ammo_limit = std::chrono::steady_clock::now();
+#if TOAD_DEBUG==2
 	std::cout << "Explosive Ammo Activated!" << std::endl;
+#endif
 }
 
 
 void Onslaught::ShieldPowerup()
 {
 	shielded = true;
+#if TOAD_DEBUG==2
 	std::cout << "Shield Activated!" << std::endl;
+#endif
 }
 
 
@@ -1533,7 +1558,9 @@ void Onslaught::speedyHandler()
 
 	if (elapsed_time.count() >= speed_duration)
 	{
+#if TOAD_DEBUG==2
 		std::cout << "Speed Boost Ended!" << std::endl;
+#endif
 		speed = 5; // Reset to default speed
 		speedy = false;
 	}
@@ -1547,7 +1574,9 @@ void Onslaught::shootyHandler()
 
 	if (elapsed_time.count() >= gattling_duration)
 	{
+#if TOAD_DEBUG==2
 		std::cout << "Gattling Gun Ended!" << std::endl;
+#endif
 		shooty = false;
 	}
 }
@@ -1560,7 +1589,9 @@ void Onslaught::boomHandler()
 
 	if (elapsed_time.count() >= explosive_ammo_duration)
 	{
+#if TOAD_DEBUG==2
 		std::cout << "Explosive Ammo Ended!" << std::endl;
+#endif
 		boomy = false;
 	}
 }
@@ -1577,6 +1608,7 @@ void Onslaught::shieldHandler()
 
 void Onslaught::PerformanceChecker()
 {
+#if TOAD_DEBUG==2
 	std::cout << bulletSpawner.size() << " bullets currently on the map!\n";
 	std::cout << zombieSpawner.size() << " zombies currently on the map!\n";
 	std::cout << chargerSpawner.size() << " chargers currently on the map!\n";
@@ -1584,6 +1616,7 @@ void Onslaught::PerformanceChecker()
 	std::cout << explosionSpawner.size() << " explosion currently on the map!\n";
 	std::cout << orcSpawner.size() << " orcs currently on the map!\n";
 	std::cout << bossSpawner.size() << " bosses currently on the map!\n";
+#endif
 }
 
 

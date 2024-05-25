@@ -191,8 +191,6 @@ private:
 
 	std::chrono::time_point<std::chrono::steady_clock> explosive_ammo_limit;
 
-
-
 	//Powerup stuff
 	int player_health;
 
