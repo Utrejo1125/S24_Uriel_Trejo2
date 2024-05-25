@@ -16,6 +16,7 @@ set(HEADER_FILES
     Enemy.h
     ExploderEnemy.h
     Explosion.h
+	Health.h
     HUD.h
     Onslaught.h
     OrcEnemy.h
@@ -30,6 +31,7 @@ set(SOURCE_FILES
     Enemy.cpp
     ExploderEnemy.cpp
     Explosion.cpp
+	Health.cpp
     HUD.cpp
     Onslaught.cpp
     OrcEnemy.cpp

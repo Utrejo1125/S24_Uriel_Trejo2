@@ -21,6 +21,7 @@ class BulletEntity; // Forward declaration
 class Onslaught : public Toad::ToadApplication
 {
 public:
+
 	Onslaught();
 
 	void restartGame();
@@ -87,6 +88,7 @@ public:
 	{
 		UP, LEFT, RIGHT, DOWN
 	};
+
 
 private:
 	// Assets:
@@ -158,17 +160,17 @@ private:
 	std::vector<PowerUp> powerupSpawner;
 
 	// Number of spawns
-	int zombie_spawns;
-	int charger_spawns;
-	int exploder_spawns;
-	int orc_spawns;
-	int boss_spawns;
+	int zombie_spawns = 0;
+	int charger_spawns = 0;
+	int exploder_spawns = 0;
+	int orc_spawns = 0;
+	int boss_spawns = 0;
 
 	// Spawn Rates
 	double zombie_spawn_rate = 1000;
-	double charger_spawn_rate = 1000;
-	double exploder_spawn_rate = 1000;
-	double orc_spawn_rate = 1000;
+	double charger_spawn_rate = 3000;
+	double exploder_spawn_rate = 2000;
+	double orc_spawn_rate = 5000;
 	double boss_spawn_rate = 5000;
 	double powerup_spawn_rate = 30000;	// 30 seconds
 
@@ -219,6 +221,10 @@ private:
 
 	//HUD
 	HUD hud;
+
+	double performance_check_interval = 5000;
+	std::chrono::time_point<std::chrono::steady_clock> last_performance_check;
+	void PerformanceChecker();
 };
 
 

@@ -1,0 +1,35 @@
+How To Play / Rules:
+Move around with w,a,s,d OR up,left,down,right.
+Press space, or enter to shoot.
+Press enter to restart when the restart screen shows up
+Defeat enemies to advance. 
+Pick up powerups to increase your chances of winning.
+Watch out for unique enemy behaviors.
+Beat the boss (level 7) to beat the game
+Good luck! this game is very hard.
+
+This game contains a lot of different features. Not only is it a full game that features various levels, win conditions, and lose conditions,
+but it also allows you to restart without having to close the window.
+
+My game is a survival game where you have to fend off against multiple different enemies, and the further you go, the harder it gets.
+Each type of enemy has unique rules and behaviors
+The types of enemies are as follows:
+
+zombie: The most basic enemy type, but also one of the fastest. follows you constantly and multiple zombies can easily overwhelm you.
+charger: These are the most agile enemies, they patrol near where they spawn, and if they spot you, they will charge to the other side to try and hit you
+exploder: BEWARE! these enemies are small and slow, but pack a punch when destroyed, keep your distance. However, if timed right, they can take out other enemies for you
+orc: Slow, but durable. These enemies take multiple hits, and sometimes, evem exploder explosions cannot take them down easily.
+boss: The largest fiercest creature. Has lots of health (with a convenient health bar to prove it!) and in his level, zombies do not stop spawning until you defeat him
+
+The rules of each level are simple, there is a predetermined amount of enemies, but their spawns are completely random, so try not to memorize them.
+once you defeat all the enemies in each level, you will advance to the next level where a greater challenge awaits you. 
+All the enemies will try to get close to you, as there are uniquely created collision detectors that check if an enemy has touched you based on their pixel size.
+Explosions also have collision detection with you, and other enemies. There is a graphic that lets you know what level you are on.
+
+My game also includes powerups to help you fend for yourself. The powerups are as follows:
+speed boots: Lets your character move a lot more swiftly for 20 seconds. (Also has a neat yellow sprite color change)
+gattling gun: You will now automatically shoot very quickly, the gattling gun has spread to help widen your range (Comes prepackaged with a cool red sprite)
+Explosive ammo: Allows you to control the power of the exploders. Your bullets now explode on impact, while you are powered up, you cannot be damaged by explosions. (changes sprite to blue like the exploders)
+shield: Allows you to take one free hit from small enemy types. Destroys that enemy on impact. (Also puts a sweet little shield bubble around your character)
+
+Enjoy!!!

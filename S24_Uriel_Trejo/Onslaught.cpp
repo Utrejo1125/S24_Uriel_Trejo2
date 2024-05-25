@@ -42,6 +42,8 @@ void Onslaught::startGame()
 	speed_limit = std::chrono::steady_clock::now();		// Start the timer
 
 	srand(time(NULL));	//seed for random number
+	srand(static_cast<unsigned int>(time(0))); // Seed the random number generator
+
 	isDead = false;
 	sprite_x_pos = 450;
 	sprite_y_pos = 400;
@@ -49,6 +51,7 @@ void Onslaught::startGame()
 	current_state = UP;
 	isMoving = false;
 	player_health = 1;
+
 }
 
 
@@ -134,9 +137,10 @@ void Onslaught::LevelHandler(int level)
 	{
 		kills = 0;
 		wonLevel = false;
-		zombie_spawns = -1;
+		//zombie_spawns = -1;
 		zombie_spawn_rate = 1000;
 		boss_spawns = 1;
+		boss_spawn_rate = 100;
 		kill_goal = 10000;		// goal will be to kill boss which awards 10,000 kills
 	}
 	else
@@ -166,6 +170,14 @@ void Onslaught::OnUpdate()
 	}
 	else if (!isDead)
 	{
+		auto current_time = std::chrono::steady_clock::now();
+		auto elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(current_time - last_performance_check);
+
+		if (elapsed_time.count() >= performance_check_interval)
+		{
+			PerformanceChecker();
+			last_performance_check = current_time;  // Reset the timer
+		}
 
 		if(!wonLevel)
 			TrackKills();
@@ -481,21 +493,25 @@ void Onslaught::HandleGattlingGun()
 	if (elapsed_time.count() >= shoot_interval)
 	{
 		last_shoot_time = current_time;
+		float spread_x = static_cast<float>(rand() % 61 - 30); // Generate a random number between -30 and 30
+		float spread_y = static_cast<float>(rand() % 61 - 30); // Generate a random number between -30 and 30
+
+
 		if (current_state == UP)
 		{
-			SpawnBullet(sprite_x_pos + 42.5, sprite_y_pos + 35);
+			SpawnBullet(sprite_x_pos + 42.5 + spread_x, sprite_y_pos + 35);
 		}
 		else if (current_state == LEFT)
 		{
-			SpawnBullet(sprite_x_pos, sprite_y_pos + 42.5);
+			SpawnBullet(sprite_x_pos, sprite_y_pos + 42.5 + spread_y);
 		}
 		else if (current_state == RIGHT)
 		{
-			SpawnBullet(sprite_x_pos + 47.5, sprite_y_pos + 12.5);
+			SpawnBullet(sprite_x_pos + 47.5, sprite_y_pos + 12.5 + spread_y);
 		}
 		else if (current_state == DOWN)
 		{
-			SpawnBullet(sprite_x_pos + 10, sprite_y_pos);
+			SpawnBullet(sprite_x_pos + 10 + spread_x, sprite_y_pos);
 		}
 	}
 }
@@ -606,6 +622,10 @@ void Onslaught::HandleChargerCollision()
 		// Delete the bullet if it collided with a charger
 		if (bulletDestroyed)
 		{
+			if (boomy)	// If explosive ammo is active
+			{
+				SpawnExplosion(bulletIterator->GetX(), bulletIterator->GetY());
+			}
 			bulletIterator = bulletSpawner.erase(bulletIterator);
 		}
 		else
@@ -652,6 +672,10 @@ void Onslaught::HandleExploderCollision()
 		// Delete the bullet if it collided with a exploder
 		if (bulletDestroyed)
 		{
+			if (boomy)	// If explosive ammo is active
+			{
+				SpawnExplosion(bulletIterator->GetX(), bulletIterator->GetY());
+			}
 			bulletIterator = bulletSpawner.erase(bulletIterator);
 		}
 		else
@@ -746,6 +770,7 @@ void Onslaught::HandleExplosionCollision()
 				if (currentorc.GetHealth() < 1)
 				{
 					orcSpawner.erase(orcSpawner.begin() + orc_iterator);  // delete the orc
+					kills++;
 				}
 				break;
 			}
@@ -764,10 +789,11 @@ void Onslaught::HandleExplosionCollision()
 				currentboss.GetY() < currentExplosion.GetY() + 230 &&  // Assuming 230 is the height of the explosion
 				currentboss.GetY() + 48 > currentExplosion.GetY())    // Assuming 256 is the height of the boss
 			{
-				DamageBoss(currentboss, 1);
+				DamageBoss(currentboss, 0.015);
 				if (currentboss.GetHealth() < 1)
 				{
 					bossSpawner.erase(bossSpawner.begin() + boss_iterator);  // delete the orc
+					kills += 10000;
 				}
 				break;
 			}
@@ -823,6 +849,10 @@ void Onslaught::HandleOrcCollision()
 		// Delete the bullet if it collided with a orc
 		if (bulletDestroyed)
 		{
+			if (boomy)	// If explosive ammo is active
+			{
+				SpawnExplosion(bulletIterator->GetX(), bulletIterator->GetY());
+			}
 			bulletIterator = bulletSpawner.erase(bulletIterator);
 		}
 		else
@@ -861,8 +891,7 @@ void Onslaught::HandleBossCollision()
 				}
 				else
 				{
-					bossIterator->SetHealth((bossIterator->GetHealth()) - 1);
-					//std::cout << bossIterator->GetHealth();
+					bossIterator->SetHealth((bossIterator->GetHealth()) - 0.20);
 				}
 				bulletDestroyed = true;
 				break;
@@ -876,6 +905,10 @@ void Onslaught::HandleBossCollision()
 		// Delete the bullet if it collided with a boss
 		if (bulletDestroyed)
 		{
+			if (boomy)	// If explosive ammo is active
+			{
+				SpawnExplosion(bulletIterator->GetX(), bulletIterator->GetY());
+			}
 			bulletIterator = bulletSpawner.erase(bulletIterator);
 		}
 		else
@@ -1532,12 +1565,25 @@ void Onslaught::boomHandler()
 	}
 }
 
+
 void Onslaught::shieldHandler()
 {
 	if (shielded)
 	{
 		Toad::Renderer::Draw(shield, sprite_x_pos - 8, sprite_y_pos - 8);
 	}
+}
+
+
+void Onslaught::PerformanceChecker()
+{
+	std::cout << bulletSpawner.size() << " bullets currently on the map!\n";
+	std::cout << zombieSpawner.size() << " zombies currently on the map!\n";
+	std::cout << chargerSpawner.size() << " chargers currently on the map!\n";
+	std::cout << exploderSpawner.size() << " exploders currently on the map!\n";
+	std::cout << explosionSpawner.size() << " explosion currently on the map!\n";
+	std::cout << orcSpawner.size() << " orcs currently on the map!\n";
+	std::cout << bossSpawner.size() << " bosses currently on the map!\n";
 }
 
 
