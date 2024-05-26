@@ -49,6 +49,7 @@ void Onslaught::startGame()
 	isDead = false;
 	sprite_x_pos = 450;
 	sprite_y_pos = 400;
+	num_keys_pressed = 0;
 	current_state = UP;
 	isMoving = false;
 	player_health = 1;
