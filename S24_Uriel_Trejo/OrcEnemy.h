@@ -22,4 +22,5 @@ private:
 	float x_pos, y_pos;
 	float x_offset, y_offset;
 	double health = 10.0;
+	double speed = 1.0f;
 };

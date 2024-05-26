@@ -8,7 +8,7 @@ Onslaught::Onslaught()
 
 void Onslaught::restartGame()
 {
-	level = 1;
+	level = starting_level;
 	wonLevel = false;
 	victory = false;
 	isDead = false;
@@ -107,19 +107,19 @@ void Onslaught::LevelHandler(int level)
 		zombie_spawn_rate = 1000;
 		charger_spawns = 10;
 		charger_spawn_rate = 3000;
-		kill_goal = 30;
+		kill_goal = 40;
 	}
 	else if (level == 4)
 	{
 		kills = 0;
 		wonLevel = false;
-		zombie_spawns = 30;
-		zombie_spawn_rate = 800;
+		zombie_spawns = 20;
+		zombie_spawn_rate = 1500;
 		charger_spawns = 10;
 		charger_spawn_rate = 1500;
 		exploder_spawns = 20;
-		exploder_spawn_rate = 1200;
-		kill_goal = 60;
+		exploder_spawn_rate = 1000;
+		kill_goal = 50;
 	}
 	else if (level == 5)
 	{
@@ -482,19 +482,19 @@ void Onslaught::HandleBullet()
 {
 	if (current_state == UP)
 	{
-		SpawnBullet(sprite_x_pos + 42.5, sprite_y_pos + 35);
+		SpawnBullet(sprite_x_pos + 25, sprite_y_pos + 35);
 	}
 	else if (current_state == LEFT)
 	{
-		SpawnBullet(sprite_x_pos, sprite_y_pos + 42.5);
+		SpawnBullet(sprite_x_pos, sprite_y_pos + 25);
 	}
 	else if (current_state == RIGHT)
 	{
-		SpawnBullet(sprite_x_pos + 47.5, sprite_y_pos + 12.5);
+		SpawnBullet(sprite_x_pos + 47.5, sprite_y_pos + 25);
 	}
 	else if (current_state == DOWN)
 	{
-		SpawnBullet(sprite_x_pos + 10, sprite_y_pos);
+		SpawnBullet(sprite_x_pos + 25, sprite_y_pos);
 	}
 }
 
@@ -512,19 +512,19 @@ void Onslaught::HandleGattlingGun()
 
 		if (current_state == UP)
 		{
-			SpawnBullet(sprite_x_pos + 42.5 + spread_x, sprite_y_pos + 35);
+			SpawnBullet(sprite_x_pos + 25 + spread_x, sprite_y_pos + 35);
 		}
 		else if (current_state == LEFT)
 		{
-			SpawnBullet(sprite_x_pos, sprite_y_pos + 42.5 + spread_y);
+			SpawnBullet(sprite_x_pos, sprite_y_pos + 25 + spread_y);
 		}
 		else if (current_state == RIGHT)
 		{
-			SpawnBullet(sprite_x_pos + 47.5, sprite_y_pos + 12.5 + spread_y);
+			SpawnBullet(sprite_x_pos + 47.5, sprite_y_pos + 25 + spread_y);
 		}
 		else if (current_state == DOWN)
 		{
-			SpawnBullet(sprite_x_pos + 10 + spread_x, sprite_y_pos);
+			SpawnBullet(sprite_x_pos + 25 + spread_x, sprite_y_pos);
 		}
 	}
 }

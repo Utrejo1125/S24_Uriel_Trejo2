@@ -21,6 +21,8 @@ class BulletEntity; // Forward declaration
 class Onslaught : public Toad::ToadApplication
 {
 public:
+	//CHANGE STARTING LEVEL:
+	int starting_level = 1;
 
 	Onslaught();
 
@@ -94,7 +96,7 @@ private:
 	// Assets:
 	//	Toad::Image day{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/backdrop.png" };
 
-	Toad::Image background{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/background.png" };
+	Toad::Image background{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/background4.png" };
 	Toad::Image loss_screen{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/lose.png" };
 	Toad::Image win_screen{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/win.png" };
 	Toad::Image bullet{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/sprite_down.png" };
@@ -217,7 +219,7 @@ private:
 
 
 	//Level
-	int level = 1;
+	int level = starting_level;
 	int kills = 0;
 	int kill_goal;
 

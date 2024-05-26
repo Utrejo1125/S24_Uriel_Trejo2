@@ -19,6 +19,6 @@ public:
 private:
 	Toad::Image bullet_sprite{ "../&{PROJECT_BINARY_DIR}/Assets/Textures/bullet.png" };
 	float x_pos, y_pos;
-	float speed = 10.0f;	//speed of bullet
+	float speed = 12.0f;	//speed of bullet
 	int direction;
 };

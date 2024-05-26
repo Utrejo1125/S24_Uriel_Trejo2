@@ -14,7 +14,7 @@ void ExploderEnemy::Update(float player_x_pos, float player_y_pos)
     float distance = std::sqrt(diff_x * diff_x + diff_y * diff_y);
 
     // Normalize the movement and multiply by the desired speed
-    float speed = 2.0f;
+    float speed = 1.2f;
     if (distance != 0)  // Avoid division by zero
     {
         diff_x = (diff_x / distance) * speed;
