@@ -33,3 +33,5 @@ Explosive ammo: Allows you to control the power of the exploders. Your bullets n
 shield: Allows you to take one free hit from small enemy types. Destroys that enemy on impact. (Also puts a sweet little shield bubble around your character)
 
 Enjoy!!!
+
+PS: Line 25 in Onslaught.hpp allows you to start from any level, just set the value

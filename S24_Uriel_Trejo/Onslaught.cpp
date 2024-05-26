@@ -140,6 +140,7 @@ void Onslaught::LevelHandler(int level)
 		orc_spawns = 20;
 		orc_spawn_rate = 1500;
 		kill_goal = 20;
+		powerup_spawn_rate = 10000;
 	}
 	else if (level == 7)
 	{
@@ -150,6 +151,7 @@ void Onslaught::LevelHandler(int level)
 		boss_spawns = 1;
 		boss_spawn_rate = 100;
 		kill_goal = 10000;		// goal will be to kill boss which awards 10,000 kills
+		powerup_spawn_rate = 30000;
 	}
 	else
 	{
